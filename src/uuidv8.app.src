@@ -1,13 +1,10 @@
-{application, uuidv8, [
-    {description, "UUID generators for the BEAM"},
-    {vsn, {file, "VERSION"}},
-    {registered, []},
-    {applications, [
-        kernel,
-        stdlib
-    ]},
-    {env, []},
-    {modules, []},
-    {licenses, ["Apache-2.0"]},
-    {links, []}
- ]}.
+{application,
+ uuidv8,
+ [{description, "UUID generators for the BEAM"},
+  {vsn, {file, "VERSION"}},
+  {registered, []},
+  {applications, [kernel, stdlib]},
+  {env, []},
+  {modules, []},
+  {licenses, ["Apache-2.0"]},
+  {links, []}]}.
