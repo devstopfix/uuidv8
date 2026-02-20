@@ -1,0 +1,51 @@
+#!/usr/bin/env escript
+%%! -name uuids@localhost
+
+main(Args) ->
+    code:add_pathz("_build/default/lib/uuidv8/ebin"),
+
+    [Gen, Count] = args(Args),
+    lists:foreach(fun(_) ->
+        UUID = uuidv8:common_format(Gen()),
+        io:format("~s~n", [UUID])
+    end, lists:seq(1, Count)).
+
+args([]) ->
+    [fun uuidv8:random_v4/0, 1];
+
+args([Name]) ->
+    [generator(Name), 1];
+
+args(["v8", [$0, $x | TagStr], StrCount ]) ->
+    Tag = list_to_integer(TagStr, 16),
+    F = fun() -> uuidv8:tagged_v8(Tag) end,
+    [F, list_to_integer(StrCount)];
+
+args(["v8node", [$0, $x | TagStr], StrCount ]) ->
+    Tag = list_to_integer(TagStr, 16),
+    F = fun() -> uuidv8:node_tagged_v8(Tag) end,
+    [F, list_to_integer(StrCount)];
+
+args([Name, StrCount ]) ->
+    [generator(Name), list_to_integer(StrCount)];
+
+args(_) ->
+    io:format("~s~n", ["Usage: gen_uuid v[478] (count)"]),
+    [fun uuidv8:random_v4/0, 0].
+
+
+generator("v1") ->
+    fun uuidv8:uuid_v1/0;
+
+generator("v4") ->
+    fun uuidv8:random_v4/0;
+
+generator("v6") ->
+    fun uuidv8:uuid_v6/0;
+
+generator("v7") ->
+    fun uuidv8:random_v7/0;
+
+generator("v8") ->
+    fun uuidv8:random_v8/0.
+
