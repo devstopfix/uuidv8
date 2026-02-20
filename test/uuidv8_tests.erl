@@ -30,7 +30,8 @@ uuidv8_bits_test() ->
 
 %% https://www.rfc-editor.org/rfc/rfc9562.html#name-example-of-a-uuidv8-value-t
 uuidv8_tagged_minimum_test() ->
-    ?assert(generate_v8_tagged() > "2489e9ad-2ee2-8e00-8ec9-32d5f69181c0").
+    UUID = generate_v8_tagged(),
+    ?assert(UUID() > "2489e9ad-2ee2-8e00-8ec9-32d5f69181c0").
 
 %% Characteristics
 
