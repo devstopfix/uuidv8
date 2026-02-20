@@ -142,7 +142,7 @@ random_v7() ->
         C:62/bitstring 
     >> = RandomBytes,
 
-    A = erlang:monotonic_time(millisecond) + erlang:time_offset(millisecond),
+    A = unix_monotonic_time_ms(),
     B = erlang:unique_integer([positive, monotonic]),
     
     << 
@@ -152,6 +152,7 @@ random_v7() ->
         (?VARIANT):2, 
         C:62/bitstring 
     >>.
+
 
 -doc "UUID v8 with 122 bits of strong random data".
 -spec random_v8() -> binary().
@@ -177,8 +178,7 @@ random_v8() ->
 -doc "UUID v8 with 48 bits of monotonic UNIX time (ms), 12 bit tag, and 62 bits of unique sequence".
 -spec tagged_v8(pos_integer()) -> binary().
 tagged_v8(B) ->
-
-    A = erlang:monotonic_time(millisecond) + erlang:time_offset(millisecond),
+    A = unix_monotonic_time_ms(),
     C = erlang:unique_integer([]),
     
     << 
@@ -192,8 +192,7 @@ tagged_v8(B) ->
 -doc "UUID v8 with 48 bits of monotonic UNIX time (ms), 12 bit tag, 32 bits of BEAM node name, and 30 bits of sequence".
 -spec node_tagged_v8(pos_integer()) -> binary().
 node_tagged_v8(B) ->
-
-    A = erlang:monotonic_time(millisecond) + erlang:time_offset(millisecond),
+    A = unix_monotonic_time_ms(),
     C = node_short_hash(),
     D = erlang:unique_integer([positive]),
     
@@ -251,3 +250,6 @@ gregorian_timestamp() ->
     Nanoseconds = erlang:system_time(nanosecond),
     Nanoseconds100 = Nanoseconds div 100,
     Nanoseconds100 + ?GREGORIAN_OFFSET.
+
+unix_monotonic_time_ms() ->
+    erlang:monotonic_time(millisecond) + erlang:time_offset(millisecond).

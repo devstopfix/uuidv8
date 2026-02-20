@@ -1,9 +1,13 @@
-# uuidv8
+# UUIDv8
 
 BEAM library for generating UUID versions 1, 4, 6, 7 and 8.
 
-Core Erlang libaries have functions for secure random data,
-unique integer generation, and distributed node names.
+Core Erlang libraries have functions for secure random data, unique integer 
+sequences, and distributed node names.
+
+Given these functions are so simple it is possible to just copy/paste the few
+required into your code rather than including this library.
+
 
 ## Build
 
@@ -18,7 +22,7 @@ unique integer generation, and distributed node names.
 Generate a hexadecimal tagged UUID:
 
 ```erlang
-UUID = binary:encode_hex(uuidv8:tagged_v8(16#DAD))
+UUID = binary:encode_hex(uuidv8:node_tagged_v8(16#81D))
 ```
 
 ## Elixir integration
