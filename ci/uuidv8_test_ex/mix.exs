@@ -5,7 +5,7 @@ defmodule UUIDV8Test.MixProject do
     [
       app: :uuidv8_test_ex,
       version: "1.0.49",
-      elixir: "~> 1.15",
+      elixir: "~> 1.18",
       start_permanent: Mix.env() == :prod,
       deps: deps()
     ]
