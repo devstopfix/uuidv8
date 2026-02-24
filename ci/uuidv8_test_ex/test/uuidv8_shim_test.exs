@@ -14,16 +14,16 @@ defmodule UUIDV8ShimTest do
   end
 
   test "random_v4" do
-    assert <<_::48, 4::4, _::12, @var::2, _::62>> = UUIDV8Shim.random_v4()
+    assert <<_::48, 4::4, _::12, @var::2, _::62>> = UUIDV8Shim.uuid_v4()
   end
 
   test "random_v4 encoded as Hexadecimal digits" do
-    uuid = UUIDV8Shim.random_v4()
+    uuid = UUIDV8Shim.uuid_v4()
     assert String.match?(encode16(uuid), ~r/^[[:xdigit:]]{32}$/)
   end
 
   test "random_v7" do
-    assert <<_::48, 7::4, _::12, @var::2, _::62>> = UUIDV8Shim.random_v7()
+    assert <<_::48, 7::4, _::12, @var::2, _::62>> = UUIDV8Shim.uuid_v7()
   end
 
   test "random_v8" do
