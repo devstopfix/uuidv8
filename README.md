@@ -8,6 +8,29 @@ sequences, and distributed node names.
 Given these functions are so simple it is possible to just copy/paste the few
 required into your code rather than including this library.
 
+## Versions & Formats
+
+There are 122 bits of usable data with 4 bits specifying the version and 2 the variant.
+
+Which is normally formatted as:
+
+    aaaaaaaa-aaaa-vbbb-cccc-dddddddddddd
+
+where v is the version.
+
+This table shows the bit layout output by each UUID generator in the library:
+
+| generator | a        | v | b        | c        | d        |
+| --------- | -------- | - | -------- | -------- | -------- |
+| random_v8 | random   | 8 | random   | random   | random   |
+|           |          |   |          |          |          |
+|           |          |   |          |          |          |
+| uuid_v7   | time     | 7 | sequence | random   | random   |
+| uuid_v6   | time     | 6 | time     | sequence | node     |
+| uuid_v4   | random   | 4 | random   | random   | random   |
+| uuid_v1   | time low | 1 | time     | sequence | node     |
+
+
 
 ## Build
 

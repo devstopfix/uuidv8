@@ -1,6 +1,6 @@
 -module(uuidv8).
 -moduledoc """
-Generators of UUID versions 4, 6, 7 & 8 as per REF-9562.
+Generators of UUID versions 1, 4, 6, 7 & 8 as per REF-9562.
 
 See https://www.rfc-editor.org/rfc/rfc9562.html
 
@@ -65,7 +65,7 @@ See https://www.rfc-editor.org/rfc/rfc9562.html#name-distributed-uuid-generation
 -define(V7_VERSION, 2#0111). 
 -define(V8_VERSION, 2#1000). 
 
--export([common_format/1, generate_with_format/2, nil/0, max/0, node_tagged_v8/1, random_v4/0, random_v7/0, random_v8/0, tagged_v8/1, uuid_v1/0, uuid_v6/0, uuidv8_bits/3]).
+-export([common_format/1, generate_with_format/2, nil/0, max/0, node_tagged_v8/1, uuid_v4/0, uuid_v7/0, random_v8/0, tagged_v8/1, uuid_v1/0, uuid_v6/0, uuidv8_bits/3]).
 
 -spec generate_with_format(fun(() -> binary()), fun((binary()) -> binary())) -> binary().
 generate_with_format(Generator, Formatter) ->
@@ -97,8 +97,8 @@ max() ->
     >>.
 
 -doc "UUID v4 with 122 bits of strong random data".
--spec random_v4() -> binary().
-random_v4() ->    
+-spec uuid_v4() -> binary().
+uuid_v4() ->    
     << 
         A:48/bitstring, 
         _OldVer:4, 
@@ -133,8 +133,8 @@ uuid_v6() ->
     >>.
 
 -doc "UUID v7 with 48 bits of monotonic UNIX time (ms), 12 bits of monotonic sequence, and 62 bits of strong random data. The sequence does not reset when the time ticks over.".
--spec random_v7() -> binary().
-random_v7() ->
+-spec uuid_v7() -> binary().
+uuid_v7() ->
     RandomBytes = crypto:strong_rand_bytes(8),
     
     << 

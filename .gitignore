@@ -19,4 +19,5 @@ logs
 rebar3.crashdump
 *~
 manifest.toml
-build
+build/
+doc/
