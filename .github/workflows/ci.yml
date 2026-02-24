@@ -86,6 +86,7 @@ jobs:
     - run: mix deps.get
     - run: mix test --warnings-as-errors
   gleam_test:
+    name: Gleam ${{ matrix.gleam }} (OTP ${{ matrix.otp }})
     runs-on: ubuntu-latest
     defaults:
       run:
