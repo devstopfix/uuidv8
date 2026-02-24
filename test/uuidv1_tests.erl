@@ -15,7 +15,7 @@ max_uuid_test() ->
 v1_test() ->
     assert_valid_uuid_v1(generate_v1()).
 
-v1_distinct_pair_test(Generator) ->
+v1_distinct_pair_test() ->
     U1 = generate_v1(),
     U2 = generate_v1(),
     ?assertNotEqual(U1, U2).

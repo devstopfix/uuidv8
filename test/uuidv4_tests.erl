@@ -6,14 +6,14 @@ random_v4_test() ->
     assert_valid_uuid_v4(generate_v4()).
 
 random_v4_uniqueness_test() ->
-    U1 = uuidv8:random_v4(),
-    U2 = uuidv8:random_v4(),
+    U1 = uuidv8:uuid_v4(),
+    U2 = uuidv8:uuid_v4(),
     ?assertNotEqual(U1, U2).
 
 %% Half the bits should differ in two random v4 UUIDs
 random_v4_entropy_test() ->
-    U1 = uuidv8:random_v4(),
-    U2 = uuidv8:random_v4(),
+    U1 = uuidv8:uuid_v4(),
+    U2 = uuidv8:uuid_v4(),
     Distance = hamming_distance(U1, U2),
     ?assert(Distance > 40),
     ?assert(Distance < 88).
@@ -22,7 +22,7 @@ random_v4_entropy_test() ->
 
 generate_v4() ->
     uuidv8:common_format(
-        uuidv8:random_v4()).
+        uuidv8:uuid_v4()).
 
 %% Assertion helpers
 

@@ -24,18 +24,8 @@ random_uuid_v7_have_similar_prefix_test() ->
 
 generate_v7() ->
     uuidv8:common_format(
-        uuidv8:random_v7()).
+        uuidv8:uuid_v7()).
 
 assert_valid_uuid_v7(U) ->
     Regex = "^[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
     ?assertMatch({match, _}, re:run(U, Regex, [unicode])).
-
-%% Entropy
-hamming_distance(<<Bin1:128>>, <<Bin2:128>>) ->
-    Diff = Bin1 bxor Bin2,
-    count_set_bits(Diff).
-
-count_set_bits(0) ->
-    0;
-count_set_bits(N) ->
-    N band 1 + count_set_bits(N bsr 1).
