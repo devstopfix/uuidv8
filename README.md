@@ -8,6 +8,9 @@ sequences, and distributed node names.
 Showcases the flexibility of the UUID v8 standard:
 
 * `uuid_v8_random/0` - as per `uuid_v4/0` - not good for database index locality, but useful if your disconnected nodes need to generate unique random identifiers
+* `uuid_v8_node/1` - time ordered with a hash or the node name and a sequence per node
+* `uuid_v8_tag/1` - introduces a tag to identify the kind of identifier as per [Stripe's human readable identifiers][objectids]
+* `uuid_v8/1` - most flexible, a time-ordered, tagged identifier with sequence (per node) and random elements
 
 Given these functions are so simple it is possible to just copy/paste the few
 required into your code rather than including this library.
@@ -26,15 +29,16 @@ where v is the version.
 
 This table shows the bit layout output by each UUID generator in the library:
 
-| generator      | a        | v | b        | c        | d        |
-| -------------- | -------- | - | -------- | -------- | -------- |
-| uuid_v8_random | random   | 8 | random   | random   | random   |
-| uuid_v8_node   | time     | 8 | tag      | node     | sequence |
-| uuid_v8_tag    | time     | 8 | tag      | sequence | sequence |
-| uuid_v7        | time     | 7 | sequence | random   | random   |
-| uuid_v6        | time hi  | 6 | time     | sequence | node     |
-| uuid_v4        | random   | 4 | random   | random   | random   |
-| uuid_v1        | time low | 1 | time     | sequence | node     |
+| generator       | a        | v | b        | c        | d        |
+| --------------- | -------- | - | -------- | -------- | -------- |
+| uuid_v8_random  | random   | 8 | random   | random   | random   |
+| uuid_v8_node    | time     | 8 | tag      | node     | sequence |
+| uuid_v8_tag     | time     | 8 | tag      | sequence | sequence |
+| uuid_v8         | time     | 8 | tag      | sequence | random   |
+| uuid_v7         | time     | 7 | sequence | random   | random   |
+| uuid_v6         | time hi  | 6 | time     | sequence | node     |
+| uuid_v4         | random   | 4 | random   | random   | random   |
+| uuid_v1         | time low | 1 | time     | sequence | node     |
 
 
 ## Build
@@ -229,3 +233,4 @@ $ ./gen_uuid v8node "0xD8D" 65536 | tail
 [v6]: https://www.rfc-editor.org/rfc/rfc9562.html#name-uuid-version-6
 [v7]: https://www.rfc-editor.org/rfc/rfc9562.html#name-uuid-version-7
 [v8]: https://www.rfc-editor.org/rfc/rfc9562.html#name-uuid-version-8
+[objectids]: https://dev.to/stripe/designing-apis-for-humans-object-ids-3o5a

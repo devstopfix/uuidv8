@@ -64,7 +64,7 @@ See https://www.rfc-editor.org/rfc/rfc9562.html#name-distributed-uuid-generation
 -define(V7_VERSION, 2#0111). 
 -define(V8_VERSION, 2#1000). 
 
--export([common_format/1, generate_with_format/2, nil/0, max/0, uuid_v8_node/1, uuid_v4/0, uuid_v7/0, uuid_v8_random/0, uuid_v8_tag/1, uuid_v1/0, uuid_v6/0, uuidv8_bits/3]).
+-export([common_format/1, generate_with_format/2, nil/0, max/0, uuid_v8_node/1, uuid_v4/0, uuid_v7/0, uuid_v8/1, uuid_v8_random/0, uuid_v8_tag/1, uuid_v1/0, uuid_v6/0, uuidv8_bits/3]).
 
 -spec generate_with_format(fun(() -> binary()), fun((binary()) -> binary())) -> binary().
 generate_with_format(Generator, Formatter) ->
@@ -152,6 +152,22 @@ uuid_v7() ->
         C:62/bitstring 
     >>.
 
+
+-doc "UUID v8 with 48 bits of monotonic UNIX time (ms), 12 bit tag, 12 bits sequence, 50 bits strong random data".
+-spec uuid_v8(pos_integer()) -> binary().
+uuid_v8(B) ->
+    A = unix_monotonic_time_ms(),
+    C = erlang:unique_integer([positive, monotonic]),
+    <<D:50, _:6>> = crypto:strong_rand_bytes(7),
+    
+    << 
+        A:48, 
+        (?V8_VERSION):4, 
+        B:12, 
+        (?VARIANT):2, 
+        C:12,
+        D:50
+    >>.
 
 -doc "UUID v8 with 122 bits of strong random data".
 -spec uuid_v8_random() -> binary().
