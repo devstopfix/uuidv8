@@ -1,5 +1,8 @@
 //// Shim to Erlang
 
+@external(erlang, "uuidv8", "common_format")
+pub fn uuid_common_format(uuid: BitArray) -> String
+
 @external(erlang, "uuidv8", "uuid_v8_tag")
 pub fn uuid_v8_tag(node_id: Int) -> BitArray
 
