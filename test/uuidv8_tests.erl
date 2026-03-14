@@ -3,10 +3,15 @@
 -include_lib("eunit/include/eunit.hrl").
 
 random_v8_common_format_test() ->
-    assert_valid_uuid_v8(generate_v8_random()).
+    Generator = generate_v8_random(),
+    assert_valid_uuid_v8(Generator).
 
 tagged_v8_common_format_test() ->
     Generator = generate_v8_tagged(),
+    assert_valid_uuid_v8(Generator()).
+
+uuid_v8_test() ->
+    Generator = generate_v8(),
     assert_valid_uuid_v8(Generator()).
 
 tagged_v8_contains_tag_test() ->
@@ -48,10 +53,17 @@ generate_v8_random() ->
         uuidv8:uuid_v8_random()).
 
 generate_v8_tagged() ->
-    Tag = rand:uniform(16#FFF),
+    Tag = generate_tag(),
     fun() ->
        uuidv8:common_format(
            uuidv8:uuid_v8_tag(Tag))
+    end.
+
+generate_v8() ->
+    Tag = generate_tag(),
+    fun() ->
+       uuidv8:common_format(
+           uuidv8:uuid_v8(Tag))
     end.
 
 %% Assertion helpers
@@ -74,3 +86,6 @@ count_set_bits(0) ->
     0;
 count_set_bits(N) ->
     N band 1 + count_set_bits(N bsr 1).
+
+generate_tag() ->
+    rand:uniform(16#FFF).
