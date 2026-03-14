@@ -64,7 +64,7 @@ See https://www.rfc-editor.org/rfc/rfc9562.html#name-distributed-uuid-generation
 -define(V7_VERSION, 2#0111). 
 -define(V8_VERSION, 2#1000). 
 
--export([common_format/1, generate_with_format/2, nil/0, max/0, node_tagged_v8/1, uuid_v4/0, uuid_v7/0, uuid_v8_random/0, uuid_v8_tag/1, uuid_v1/0, uuid_v6/0, uuidv8_bits/3]).
+-export([common_format/1, generate_with_format/2, nil/0, max/0, uuid_v8_node/1, uuid_v4/0, uuid_v7/0, uuid_v8_random/0, uuid_v8_tag/1, uuid_v1/0, uuid_v6/0, uuidv8_bits/3]).
 
 -spec generate_with_format(fun(() -> binary()), fun((binary()) -> binary())) -> binary().
 generate_with_format(Generator, Formatter) ->
@@ -189,8 +189,8 @@ uuid_v8_tag(B) ->
     >>.
 
 -doc "UUID v8 with 48 bits of monotonic UNIX time (ms), 12 bit tag, 32 bits of BEAM node name, and 30 bits of sequence".
--spec node_tagged_v8(pos_integer()) -> binary().
-node_tagged_v8(B) ->
+-spec uuid_v8_node(pos_integer()) -> binary().
+uuid_v8_node(B) ->
     A = unix_monotonic_time_ms(),
     C = node_short_hash(),
     D = erlang:unique_integer([positive]),

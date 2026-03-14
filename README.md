@@ -29,13 +29,12 @@ This table shows the bit layout output by each UUID generator in the library:
 | generator      | a        | v | b        | c        | d        |
 | -------------- | -------- | - | -------- | -------- | -------- |
 | uuid_v8_random | random   | 8 | random   | random   | random   |
-| uuid_v8_tag    | time     |   | tag      | sequence | sequence |
-| node_tagged_v8 | time     | 8 | tag      | node     | sequence |
+| uuid_v8_node   | time     | 8 | tag      | node     | sequence |
+| uuid_v8_tag    | time     | 8 | tag      | sequence | sequence |
 | uuid_v7        | time     | 7 | sequence | random   | random   |
-| uuid_v6        | time     | 6 | time     | sequence | node     |
+| uuid_v6        | time hi  | 6 | time     | sequence | node     |
 | uuid_v4        | random   | 4 | random   | random   | random   |
 | uuid_v1        | time low | 1 | time     | sequence | node     |
-
 
 
 ## Build
@@ -51,7 +50,7 @@ This table shows the bit layout output by each UUID generator in the library:
 Generate a hexadecimal tagged UUID:
 
 ```erlang
-UUID = binary:encode_hex(uuidv8:node_tagged_v8(16#81D))
+UUID = binary:encode_hex(uuidv8:uuid_v8_node(16#81D))
 ```
 
 ## Elixir integration
