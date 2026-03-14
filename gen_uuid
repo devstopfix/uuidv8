@@ -11,7 +11,17 @@ main(Args) ->
     end, lists:seq(1, Count)).
 
 args([]) ->
-    [fun uuidv8:random_v4/0, 1];
+    io:format("~s~n\t~s~n\t~s~n\t~s~n\t~s~n\t~s~n\t~s~n\t~s~n~n~s", [
+        "Usage:", "gen_uuid v1 [count]",
+        "gen_uuid v4 [count]",
+        "gen_uuid v6 [count]", 
+        "gen_uuid v7 [count]", 
+        "gen_uuid v8 [count]" , 
+        "gen_uuid v8 0x01D [count] (with hexadecimal tag of 3 nibbles)",
+        "gen_uuid v8node 0x0DE [count] (with hexadecimal tag of 3 nibbles)",
+        "Sample: "
+    ]),
+    [fun uuidv8:random_v8/0, 1];
 
 args([Name]) ->
     [generator(Name), 1];
@@ -30,7 +40,7 @@ args([Name, StrCount ]) ->
     [generator(Name), list_to_integer(StrCount)];
 
 args(_) ->
-    io:format("~s~n", ["Usage: gen_uuid v[478] (count)"]),
+    io:format("~s~n", ["Unknown - run with without parameters to see options"]),
     [fun uuidv8:random_v4/0, 0].
 
 
@@ -38,13 +48,13 @@ generator("v1") ->
     fun uuidv8:uuid_v1/0;
 
 generator("v4") ->
-    fun uuidv8:random_v4/0;
+    fun uuidv8:uuid_v4/0;
 
 generator("v6") ->
     fun uuidv8:uuid_v6/0;
 
 generator("v7") ->
-    fun uuidv8:random_v7/0;
+    fun uuidv8:uuid_v7/0;
 
 generator("v8") ->
     fun uuidv8:random_v8/0.
