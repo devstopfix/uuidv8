@@ -17,11 +17,9 @@ pub fn uuid_common_format_test() -> Nil {
 
 pub fn uuid_common_format_contains_tag_test() -> Nil {
   let tag = 0x1ea
+  let expected = "-8" <> string.lowercase(int.to_base16(tag)) <> "-"
   let uuid: String = tag |> uuid_v8_tag() |> uuid_common_format()
-  assert string.contains(
-    uuid,
-    "-8" <> string.lowercase(int.to_base16(tag)) <> "-",
-  )
+  assert string.contains(uuid, expected)
 }
 
 pub fn uuid_v8_tag_hex_test() -> Nil {
