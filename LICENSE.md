@@ -171,7 +171,7 @@ accepting any such warranty or additional liability.
 
 END OF TERMS AND CONDITIONS
 
-Copyright 2026, Devstopfix <devstopfix@gmail.com>.
+Copyright 2026, Devstopfix.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
