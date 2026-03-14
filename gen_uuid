@@ -17,8 +17,8 @@ args([]) ->
         "gen_uuid v6 [count]", 
         "gen_uuid v7 [count]", 
         "gen_uuid v8 [count]" , 
-        "gen_uuid v8 0x01D [count] (with hexadecimal tag of 3 nibbles)",
-        "gen_uuid v8node 0x0DE [count] (with hexadecimal tag of 3 nibbles)",
+        "gen_uuid v8 0x01D 2 (2 ids with hexadecimal tag of 3 nibbles)",
+        "gen_uuid v8node 0x0DE 2 (2 ids with hexadecimal tag of 3 nibbles)",
         "Sample: "
     ]),
     [fun uuidv8:random_v8/0, 1];

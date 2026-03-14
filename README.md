@@ -8,6 +8,8 @@ sequences, and distributed node names.
 Given these functions are so simple it is possible to just copy/paste the few
 required into your code rather than including this library.
 
+[![CI](https://github.com/devstopfix/uuidv8/actions/workflows/ci.yml/badge.svg)](https://github.com/devstopfix/uuidv8/actions/workflows/ci.yml)
+
 ## Versions & Formats
 
 There are 122 bits of usable data with 4 bits specifying the version and 2 the variant.
@@ -20,15 +22,15 @@ where v is the version.
 
 This table shows the bit layout output by each UUID generator in the library:
 
-| generator | a        | v | b        | c        | d        |
-| --------- | -------- | - | -------- | -------- | -------- |
-| random_v8 | random   | 8 | random   | random   | random   |
-|           |          |   |          |          |          |
-|           |          |   |          |          |          |
-| uuid_v7   | time     | 7 | sequence | random   | random   |
-| uuid_v6   | time     | 6 | time     | sequence | node     |
-| uuid_v4   | random   | 4 | random   | random   | random   |
-| uuid_v1   | time low | 1 | time     | sequence | node     |
+| generator      | a        | v | b        | c        | d        |
+| -------------- | -------- | - | -------- | -------- | -------- |
+| random_v8      | random   | 8 | random   | random   | random   |
+| tagged_v8      | time     |   | tag      | sequence | sequence |
+| node_tagged_v8 | time     | 8 | tag      | node     | sequence |
+| uuid_v7        | time     | 7 | sequence | random   | random   |
+| uuid_v6        | time     | 6 | time     | sequence | node     |
+| uuid_v4        | random   | 4 | random   | random   | random   |
+| uuid_v1        | time low | 1 | time     | sequence | node     |
 
 
 

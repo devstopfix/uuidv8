@@ -57,7 +57,6 @@ See https://www.rfc-editor.org/rfc/rfc9562.html#name-distributed-uuid-generation
 """.
 
 
-%% The number of seconds from 0000-01-01 to 1970-01-01
 -define(VARIANT, 2#10).   
 -define(V1_VERSION, 2#0001). 
 -define(V4_VERSION, 2#0100). 
