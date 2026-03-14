@@ -29,7 +29,7 @@ This table shows the bit layout output by each UUID generator in the library:
 | generator      | a        | v | b        | c        | d        |
 | -------------- | -------- | - | -------- | -------- | -------- |
 | uuid_v8_random | random   | 8 | random   | random   | random   |
-| tagged_v8      | time     |   | tag      | sequence | sequence |
+| uuid_v8_tag    | time     |   | tag      | sequence | sequence |
 | node_tagged_v8 | time     | 8 | tag      | node     | sequence |
 | uuid_v7        | time     | 7 | sequence | random   | random   |
 | uuid_v6        | time     | 6 | time     | sequence | node     |
@@ -67,6 +67,8 @@ defmodule YourApp.Identifiers do
 end
 ```
 
+See [uuidv8_shim.ex](ci/uuidv8_test_ex/lib/uuidv8_shim.ex) for more delegates.
+
 ## Gleam integration
 
 Generate a hexadecimal UUID from Gleam:
@@ -81,6 +83,9 @@ pub fn random_uuid_v8_hex() -> String {
 @external(erlang, "uuidv8", "uuid_v8_random")
 pub fn uuid_v8_random() -> BitArray
 ```
+
+See [uuidv8_shim.gleam](ci/uuidv8_test_gleam/src/uuidv8_shim.gleam) for more externals.
+
 
 # UUID Versions
 

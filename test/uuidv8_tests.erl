@@ -14,7 +14,7 @@ tagged_v8_contains_tag_test() ->
     ExpectedHex = io_lib:format("~3.16.0B", [Tag]),
     UUID =
         binary:encode_hex(
-            uuidv8:tagged_v8(Tag)),
+            uuidv8:uuid_v8_tag(Tag)),
     ?assertNotEqual(string:find(UUID, ExpectedHex), nomatch).
 
 random_v8_tagged_uniqueness_test() ->
@@ -51,7 +51,7 @@ generate_v8_tagged() ->
     Tag = rand:uniform(16#FFF),
     fun() ->
        uuidv8:common_format(
-           uuidv8:tagged_v8(Tag))
+           uuidv8:uuid_v8_tag(Tag))
     end.
 
 %% Assertion helpers
