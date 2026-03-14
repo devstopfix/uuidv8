@@ -64,7 +64,7 @@ See https://www.rfc-editor.org/rfc/rfc9562.html#name-distributed-uuid-generation
 -define(V7_VERSION, 2#0111). 
 -define(V8_VERSION, 2#1000). 
 
--export([common_format/1, generate_with_format/2, nil/0, max/0, node_tagged_v8/1, uuid_v4/0, uuid_v7/0, random_v8/0, tagged_v8/1, uuid_v1/0, uuid_v6/0, uuidv8_bits/3]).
+-export([common_format/1, generate_with_format/2, nil/0, max/0, node_tagged_v8/1, uuid_v4/0, uuid_v7/0, uuid_v8_random/0, tagged_v8/1, uuid_v1/0, uuid_v6/0, uuidv8_bits/3]).
 
 -spec generate_with_format(fun(() -> binary()), fun((binary()) -> binary())) -> binary().
 generate_with_format(Generator, Formatter) ->
@@ -154,8 +154,8 @@ uuid_v7() ->
 
 
 -doc "UUID v8 with 122 bits of strong random data".
--spec random_v8() -> binary().
-random_v8() ->
+-spec uuid_v8_random() -> binary().
+uuid_v8_random() ->
     RandomBytes = crypto:strong_rand_bytes(16),
     
     << 

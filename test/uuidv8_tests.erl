@@ -37,15 +37,15 @@ uuidv8_tagged_minimum_test() ->
 
 %% Half the bits should differ in two random v8 UUIDs
 random_v8_entropy_test() ->
-    U1 = uuidv8:random_v8(),
-    U2 = uuidv8:random_v8(),
+    U1 = uuidv8:uuid_v8_random(),
+    U2 = uuidv8:uuid_v8_random(),
     Distance = hamming_distance(U1, U2),
     ?assert(Distance > 40),
     ?assert(Distance < 88).
 
 generate_v8_random() ->
     uuidv8:common_format(
-        uuidv8:random_v8()).
+        uuidv8:uuid_v8_random()).
 
 generate_v8_tagged() ->
     Tag = rand:uniform(16#FFF),

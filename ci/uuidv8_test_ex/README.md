@@ -22,9 +22,9 @@ Create a module in your app that generates the identifiers you need:
 ```elixir
 defmodule YourApp.Identifiers do
     import Base, only: [encode16: 1]
-    defdelegate random_v8, to: :uuidv8
+    defdelegate uuid_v8_random, to: :uuidv8
 
-    def random_uuidv8_hex, do: encode16(random_v8())
+    def random_uuidv8_hex, do: encode16(uuid_v8_random())
 end
 ```
 

@@ -26,8 +26,8 @@ defmodule UUIDV8ShimTest do
     assert <<_::48, 7::4, _::12, @var::2, _::62>> = UUIDV8Shim.uuid_v7()
   end
 
-  test "random_v8" do
-    assert <<_::48, 8::4, _::12, @var::2, _::62>> = UUIDV8Shim.random_v8()
+  test "uuid_v8_random" do
+    assert <<_::48, 8::4, _::12, @var::2, _::62>> = UUIDV8Shim.uuid_v8_random()
   end
 
   test "uuid_v6" do

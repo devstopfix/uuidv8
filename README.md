@@ -5,6 +5,10 @@ BEAM library for generating UUID versions 1, 4, 6, 7 and 8.
 Core Erlang libraries have functions for secure random data, unique integer 
 sequences, and distributed node names.
 
+Showcases the flexibility of the UUID v8 standard:
+
+* `uuid_v8_random/0` - as per `uuid_v4/0` - not good for database index locality, but useful if your disconnected nodes need to generate unique random identifiers
+
 Given these functions are so simple it is possible to just copy/paste the few
 required into your code rather than including this library.
 
@@ -24,7 +28,7 @@ This table shows the bit layout output by each UUID generator in the library:
 
 | generator      | a        | v | b        | c        | d        |
 | -------------- | -------- | - | -------- | -------- | -------- |
-| random_v8      | random   | 8 | random   | random   | random   |
+| uuid_v8_random | random   | 8 | random   | random   | random   |
 | tagged_v8      | time     |   | tag      | sequence | sequence |
 | node_tagged_v8 | time     | 8 | tag      | node     | sequence |
 | uuid_v7        | time     | 7 | sequence | random   | random   |
@@ -57,9 +61,9 @@ Generate a hexadecimal UUID from Elixir:
 ```elixir
 defmodule YourApp.Identifiers do
     import Base, only: [encode16: 1]
-    defdelegate random_v8, to: :uuidv8
+    defdelegate uuid_v8_random, to: :uuidv8
 
-    def random_uuidv8_hex, do: encode16(random_v8())
+    def random_uuidv8_hex, do: encode16(uuid_v8_random())
 end
 ```
 
@@ -71,11 +75,11 @@ Generate a hexadecimal UUID from Gleam:
 import gleam/bit_array.{base16_encode}
 
 pub fn random_uuid_v8_hex() -> String {
-    base16_encode(random_v8())
+    base16_encode(uuid_v8_random())
 }
 
-@external(erlang, "uuidv8", "random_v8")
-pub fn random_v8() -> BitArray
+@external(erlang, "uuidv8", "uuid_v8_random")
+pub fn uuid_v8_random() -> BitArray
 ```
 
 # UUID Versions

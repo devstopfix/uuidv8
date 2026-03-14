@@ -11,10 +11,10 @@ Create your module that generates the identifiers that you need:
 
 ```gleam
 import gleam/bit_array.{base16_encode}
-import uuidv8.{random_v8}
+import uuidv8.{uuid_v8_random}
 
 pub fn random_uuid_v8_hex() -> String {
-  base16_encode(random_v8())
+  base16_encode(uuid_v8_random())
 }
 ```
 

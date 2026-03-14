@@ -9,5 +9,5 @@ defmodule UUIDV8Shim do
   defdelegate uuid_v4, to: :uuidv8
   defdelegate uuid_v6, to: :uuidv8
   defdelegate uuid_v7, to: :uuidv8
-  defdelegate random_v8, to: :uuidv8
+  defdelegate uuid_v8_random, to: :uuidv8
 end
